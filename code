@@ -1,0 +1,24 @@
+```python
+# Sum of two floating point numbers
+float1 = 3.14
+float2 = 2.71
+float_sum = float1 + float2
+print("Sum of two floats:", float_sum)
+print("Data type:", type(float_sum))
+print()
+
+# Difference between two integers
+int1 = 10
+int2 = 4
+int_difference = int1 - int2
+print("Difference of two integers:", int_difference)
+print("Data type:", type(int_difference))
+print()
+
+# Product of a floating point number and an integer
+float_num = 5.5
+int_num = 3
+product = float_num * int_num
+print("Product of a float and an integer:", product)
+print("Data type:", type(product))
+```
