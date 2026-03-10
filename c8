@@ -1,0 +1,93 @@
+{
+ "nbformat": 4,
+ "nbformat_minor": 5,
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "name": "python",
+   "version": "3.10.0"
+  }
+ },
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "md-intro",
+   "metadata": {},
+   "source": [
+    "## Gumbel Distribution Sampler\n",
+    "\n",
+    "The **Gumbel distribution** (also known as the Type-I extreme value distribution) models the distribution of the *maximum* of a large number of independent, identically distributed random variables. It appears naturally in hydrology (maximum flood levels), meteorology (extreme wind speeds), and materials science (fracture strength).\n",
+    "\n",
+    "Its PDF is:\n",
+    "$$p(x) = \\frac{1}{\\beta} e^{-(z + e^{-z})}, \\quad z = \\frac{x - \\mu}{\\beta}$$\n",
+    "\n",
+    "where $\\mu$ is the location (mode) and $\\beta > 0$ is the scale parameter.\n",
+    "\n",
+    "**numpy docs:** `numpy.random.Generator.gumbel(loc=0.0, scale=1.0, size=None)`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cell-1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cell-2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Draw 1000 random variates from a Gumbel distribution\n",
+    "# loc=0 (mode), scale=1 (spread)\n",
+    "rng = np.random.default_rng(seed=42)\n",
+    "samples = rng.gumbel(loc=0.0, scale=1.0, size=1000)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cell-3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Histogram into 100 bins and overlay the theoretical PDF\n",
+    "fig, ax = plt.subplots(figsize=(8, 5))\n",
+    "\n",
+    "# Histogram (density=True so it aligns with the PDF)\n",
+    "ax.hist(samples, bins=100, density=True,\n",
+    "        color='steelblue', edgecolor='white', linewidth=0.3,\n",
+    "        label='Sampled data (n=1000)')\n",
+    "\n",
+    "# Overlay the theoretical Gumbel PDF\n",
+    "x = np.linspace(samples.min() - 0.5, samples.max() + 0.5, 500)\n",
+    "z = x  # loc=0, scale=1\n",
+    "pdf = np.exp(-(z + np.exp(-z)))\n",
+    "ax.plot(x, pdf, color='tomato', linewidth=2, label='Theoretical PDF')\n",
+    "\n",
+    "ax.set_xlabel('Value', fontsize=13)\n",
+    "ax.set_ylabel('Probability Density', fontsize=13)\n",
+    "ax.set_title('Gumbel Distribution  (loc=0, scale=1)  —  1000 samples, 100 bins',\n",
+    "             fontsize=12)\n",
+    "ax.legend(fontsize=11)\n",
+    "ax.grid(True, linestyle='--', alpha=0.4)\n",
+    "\n",
+    "plt.tight_layout()\n",
+    "plt.savefig('gumbel_histogram.pdf')\n",
+    "plt.show()\n",
+    "print('Figure saved as gumbel_histogram.pdf')"
+   ]
+  }
+ ]
+}
+
