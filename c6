@@ -1,0 +1,85 @@
+{
+ "nbformat": 4,
+ "nbformat_minor": 5,
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "name": "python",
+   "version": "3.10.0"
+  }
+ },
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cell-1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cell-2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a numpy array x ranging from 0 to 1 in 100 steps\n",
+    "x = np.linspace(0, 1, 100)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cell-3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Define functions that return sin(x) and cos(x)\n",
+    "def sine(x):\n",
+    "    return np.sin(x)\n",
+    "\n",
+    "def cosine(x):\n",
+    "    return np.cos(x)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cell-4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a 1x2 multipanel plot of sin(x) and cos(x)\n",
+    "fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))\n",
+    "\n",
+    "# Left panel: sin(x)\n",
+    "ax1.plot(x, sine(x), linewidth=2, color='steelblue')\n",
+    "ax1.set_title('sin(x)', fontsize=14)\n",
+    "ax1.set_xlabel('x', fontsize=12)\n",
+    "ax1.set_ylabel('sin(x)', fontsize=12)\n",
+    "ax1.grid(True, linestyle='--', alpha=0.5)\n",
+    "\n",
+    "# Right panel: cos(x)\n",
+    "ax2.plot(x, cosine(x), linewidth=2, color='tomato')\n",
+    "ax2.set_title('cos(x)', fontsize=14)\n",
+    "ax2.set_xlabel('x', fontsize=12)\n",
+    "ax2.set_ylabel('cos(x)', fontsize=12)\n",
+    "ax2.grid(True, linestyle='--', alpha=0.5)\n",
+    "\n",
+    "plt.tight_layout()\n",
+    "plt.savefig('sincos_plot.pdf')\n",
+    "plt.show()\n",
+    "print('Figure saved as sincos_plot.pdf')"
+   ]
+  }
+ ]
+}
+
